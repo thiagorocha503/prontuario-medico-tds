@@ -28,7 +28,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   TextEditingController _txtNome = new TextEditingController();
   TextEditingController _txtIdade = new TextEditingController();
   TextEditingController _txtData = new TextEditingController();
@@ -51,159 +50,157 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void onReset() {
     //setState(() {
-      this._txtNome.text = "";
-      this._txtIdade.text = "";
-      this._txtData.text = "";
-      this._txtSintomas.text = "";
-    //});  
+    this._txtNome.text = "";
+    this._txtIdade.text = "";
+    this._txtData.text = "";
+    this._txtSintomas.text = "";
+    //});
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Prontuário médico'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: () {
-              this.onReset();
-            },
-          ),
-        ],
-      ),
-      body: new Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            new Container(
-              child: new TextField(
-                keyboardType: TextInputType.text,
-                style: new TextStyle(
-                    fontSize: 12.0,
-                    color: const Color(0xFF000000),
-                    fontWeight: FontWeight.w200,
-                    fontFamily: "Roboto"
-                ),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Nome",
-                  hintText: "Digite o seu nome",
-                ),
-                controller: this._txtNome,
-              ),
-              padding: const EdgeInsets.all(5.0),
-              alignment: Alignment.center,
+        appBar: new AppBar(
+          title: new Text('Prontuário médico'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () {
+                this.onReset();
+              },
             ),
-            new Container(
-              child: new TextField(
-                keyboardType: TextInputType.number,
-                style: new TextStyle(
-                    fontSize: 12.0,
-                    color: const Color(0xFF000000),
-                    fontWeight: FontWeight.w200,
-                    fontFamily: "Roboto"
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: new Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                new Container(
+                  child: new TextField(
+                    keyboardType: TextInputType.text,
+                    style: new TextStyle(
+                        fontSize: 12.0,
+                        color: const Color(0xFF000000),
+                        fontWeight: FontWeight.w200,
+                        fontFamily: "Roboto"),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Nome",
+                      hintText: "Digite o seu nome",
+                    ),
+                    controller: this._txtNome,
+                  ),
+                  padding: const EdgeInsets.all(5.0),
+                  alignment: Alignment.center,
                 ),
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Idade",
-                    hintText: "digite sua idade"
+                new Container(
+                  child: new TextField(
+                    keyboardType: TextInputType.number,
+                    style: new TextStyle(
+                        fontSize: 12.0,
+                        color: const Color(0xFF000000),
+                        fontWeight: FontWeight.w200,
+                        fontFamily: "Roboto"),
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Idade",
+                        hintText: "digite sua idade"),
+                    controller: this._txtIdade,
+                  ),
+                  padding: const EdgeInsets.all(5.0),
+                  alignment: Alignment.center,
                 ),
-                controller: this._txtIdade,
-              ),
-              padding: const EdgeInsets.all(5.0),
-              alignment: Alignment.center,
-            ),
-            new Container(
-              child: new TextField(
-                style: new TextStyle(
-                    fontSize: 12.0,
-                    color: const Color(0xFF000000),
-                    fontWeight: FontWeight.w200,
-                    fontFamily: "Roboto"),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Data",
-                  hintText: "Digite a data da consulta",
+                new Container(
+                  child: new TextField(
+                    style: new TextStyle(
+                        fontSize: 12.0,
+                        color: const Color(0xFF000000),
+                        fontWeight: FontWeight.w200,
+                        fontFamily: "Roboto"),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Data",
+                      hintText: "Digite a data da consulta",
+                    ),
+                    controller: this._txtData,
+                  ),
+                  padding: const EdgeInsets.all(5.0),
+                  alignment: Alignment.center,
                 ),
-                controller: this._txtData,
-              ),
-              padding: const EdgeInsets.all(5.0),
-              alignment: Alignment.center,
-            ),
-            new Container(
-              child: new Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    new Radio(
-                        key: null,
-                        groupValue: null,
-                        value: .5,
-                        onChanged: radioChanged),
-                    new Text(
-                      "masculino",
+                new Container(
+                  child: new Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        new Radio(
+                            key: null,
+                            groupValue: null,
+                            value: .5,
+                            onChanged: radioChanged),
+                        new Text(
+                          "masculino",
+                          style: new TextStyle(
+                              fontSize: 12.0,
+                              color: const Color(0xFF000000),
+                              fontWeight: FontWeight.w200,
+                              fontFamily: "Roboto"),
+                        ),
+                        new Radio(
+                            key: null,
+                            groupValue: null,
+                            value: .5,
+                            onChanged: radioChanged),
+                        new Text(
+                          "feminino",
+                          style: new TextStyle(
+                              fontSize: 12.0,
+                              color: const Color(0xFF000000),
+                              fontWeight: FontWeight.w200,
+                              fontFamily: "Roboto"),
+                        )
+                      ]),
+                  padding: const EdgeInsets.all(5.0),
+                  alignment: Alignment.center,
+                ),
+                new Container(
+                  child: new TextField(
+                    style: new TextStyle(
+                        fontSize: 12.0,
+                        color: const Color(0xFF000000),
+                        fontWeight: FontWeight.w200,
+                        fontFamily: "Roboto"),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Sintomas",
+                      hintText: "Digite seus sintomas",
+                    ),
+                    controller: this._txtSintomas,
+                  ),
+                  padding: const EdgeInsets.all(5.0),
+                  alignment: Alignment.center,
+                ),
+                new Container(
+                  child: new RaisedButton(
+                    key: null,
+                    onPressed: () {},
+                    color: Colors.blue,
+                    child: new Text(
+                      "Cadastrar",
                       style: new TextStyle(
                           fontSize: 12.0,
                           color: const Color(0xFF000000),
                           fontWeight: FontWeight.w200,
                           fontFamily: "Roboto"),
                     ),
-                    new Radio(
-                        key: null,
-                        groupValue: null,
-                        value: .5,
-                        onChanged: radioChanged),
-                    new Text(
-                      "feminino",
-                      style: new TextStyle(
-                          fontSize: 12.0,
-                          color: const Color(0xFF000000),
-                          fontWeight: FontWeight.w200,
-                          fontFamily: "Roboto"),
-                    )
-                  ]),
-              padding: const EdgeInsets.all(5.0),
-              alignment: Alignment.center,
-            ),
-            new Container(
-              child: new TextField(
-                style: new TextStyle(
-                    fontSize: 12.0,
-                    color: const Color(0xFF000000),
-                    fontWeight: FontWeight.w200,
-                    fontFamily: "Roboto"),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Sintomas",
-                  hintText: "Digite seus sintomas",
-                ),
-                controller: this._txtSintomas,
-              ),
-              padding: const EdgeInsets.all(5.0),
-              alignment: Alignment.center,
-            ),
-            new Container(
-              child: new RaisedButton(
-                key: null,
-                onPressed: () {},
-                color: Colors.blue,
-                child: new Text(
-                  "Cadastrar",
-                  style: new TextStyle(
-                      fontSize: 12.0,
-                      color: const Color(0xFF000000),
-                      fontWeight: FontWeight.w200,
-                      fontFamily: "Roboto"),
-                ),
-              ),
-              padding: const EdgeInsets.all(0.0),
-              alignment: Alignment.center,
-            )
-          ]),
-    );
+                  ),
+                  padding: const EdgeInsets.all(0.0),
+                  alignment: Alignment.center,
+                )
+              ]),
+        ));
   }
 
   void buttonPressed() {}
