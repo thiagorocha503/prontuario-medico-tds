@@ -27,6 +27,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+    
     @override
     Widget build(BuildContext context) {
       return new Scaffold(
@@ -40,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               new Container(
+              
                 child:
                   new TextField(
                     style: new TextStyle(fontSize:12.0,
@@ -53,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
     
-                padding: const EdgeInsets.all(0.0),
+                padding: const EdgeInsets.all(5.0),
                 alignment: Alignment.center,
               ),
     
@@ -71,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
     
-                padding: const EdgeInsets.all(0.0),
+                padding: const EdgeInsets.all(5.0),
                 alignment: Alignment.center,
               ),
     
@@ -89,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
     
-                padding: const EdgeInsets.all(0.0),
+                padding: const EdgeInsets.all(5.0),
                 alignment: Alignment.center,
               ),
     
@@ -123,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
     
                   ),
     
-                padding: const EdgeInsets.all(0.0),
+                padding: const EdgeInsets.all(5.0),
                 alignment: Alignment.center,
               ),
     
@@ -141,14 +143,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
     
-                padding: const EdgeInsets.all(0.0),
+                padding: const EdgeInsets.all(5.0),
                 alignment: Alignment.center,
               ),
     
               new Container(
                 child:
                   new RaisedButton(key:null, onPressed:buttonPressed,
-                    color: const Color(0xFFe0e0e0),
+                    color: Colors.blue,
                     child:
                       new Text(
                       "Cadastrar",
@@ -156,9 +158,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: const Color(0xFF000000),
                         fontWeight: FontWeight.w200,
                         fontFamily: "Roboto"),
-                      )
-                    ),
-    
+                      ),
+                    ),     
                 padding: const EdgeInsets.all(0.0),
                 alignment: Alignment.center,
               )
