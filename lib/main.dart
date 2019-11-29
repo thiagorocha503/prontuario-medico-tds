@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       new Radio(key:null, groupValue: null, value: .5, onChanged: radioChanged),
     
                       new Text(
-                      "qWerty1",
+                      "masculino",
                         style: new TextStyle(fontSize:12.0,
                         color: const Color(0xFF000000),
                         fontWeight: FontWeight.w200,
@@ -113,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       new Radio(key:null, groupValue: null, value: .5, onChanged: radioChanged),
     
                       new Text(
-                      "qWerty1",
+                      "feminino",
                         style: new TextStyle(fontSize:12.0,
                         color: const Color(0xFF000000),
                         fontWeight: FontWeight.w200,
