@@ -28,6 +28,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  TextEditingController _txtNome = new TextEditingController();
+  TextEditingController _txtIdade = new TextEditingController();
+  TextEditingController _txtData = new TextEditingController();
+  TextEditingController _txtSintomas = new TextEditingController();
   DateTime selectedDate = new DateTime.now(); //data selecionada
 
   Future<void> _selectDate(BuildContext context) async {
@@ -44,6 +49,15 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void onReset() {
+    //setState(() {
+      this._txtNome.text = "";
+      this._txtIdade.text = "";
+      this._txtData.text = "";
+      this._txtSintomas.text = "";
+    //});  
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -52,7 +66,9 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.refresh),
-            onPressed: () {},
+            onPressed: () {
+              this.onReset();
+            },
           ),
         ],
       ),
@@ -68,12 +84,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     fontSize: 12.0,
                     color: const Color(0xFF000000),
                     fontWeight: FontWeight.w200,
-                    fontFamily: "Roboto"),
+                    fontFamily: "Roboto"
+                ),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: "Nome",
                   hintText: "Digite o seu nome",
                 ),
+                controller: this._txtNome,
               ),
               padding: const EdgeInsets.all(5.0),
               alignment: Alignment.center,
@@ -85,11 +103,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     fontSize: 12.0,
                     color: const Color(0xFF000000),
                     fontWeight: FontWeight.w200,
-                    fontFamily: "Roboto"),
+                    fontFamily: "Roboto"
+                ),
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Idade",
-                    hintText: "digite sua idade"),
+                    hintText: "digite sua idade"
+                ),
+                controller: this._txtIdade,
               ),
               padding: const EdgeInsets.all(5.0),
               alignment: Alignment.center,
@@ -106,6 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   labelText: "Data",
                   hintText: "Digite a data da consulta",
                 ),
+                controller: this._txtData,
               ),
               padding: const EdgeInsets.all(5.0),
               alignment: Alignment.center,
@@ -158,6 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   labelText: "Sintomas",
                   hintText: "Digite seus sintomas",
                 ),
+                controller: this._txtSintomas,
               ),
               padding: const EdgeInsets.all(5.0),
               alignment: Alignment.center,
