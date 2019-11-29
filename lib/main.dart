@@ -78,6 +78,17 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 new Container(
+                  padding: EdgeInsets.all(15),
+                  child: new Text("Dados clínicos",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
+                new Container(
                   child: new TextField(
                     keyboardType: TextInputType.text,
                     style: new TextStyle(
@@ -92,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     controller: this._txtNome,
                   ),
-                  padding: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                   alignment: Alignment.center,
                 ),
                 new Container(
