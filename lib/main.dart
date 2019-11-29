@@ -46,6 +46,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: const Color(0xFF000000),
                     fontWeight: FontWeight.w200,
                     fontFamily: "Roboto"),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Nome",
+                      hintText: "Digite o seu nome",
+                    ),
                   ),
     
                 padding: const EdgeInsets.all(0.0),
@@ -59,6 +64,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: const Color(0xFF000000),
                     fontWeight: FontWeight.w200,
                     fontFamily: "Roboto"),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "idade",
+                      hintText: "digite sua idade"
+                    ),
                   ),
     
                 padding: const EdgeInsets.all(0.0),
@@ -72,6 +82,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: const Color(0xFF000000),
                     fontWeight: FontWeight.w200,
                     fontFamily: "Roboto"),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Data",
+                      hintText: "Digite a data da consulta",
+                    ),
                   ),
     
                 padding: const EdgeInsets.all(0.0),
@@ -119,6 +134,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: const Color(0xFF000000),
                     fontWeight: FontWeight.w200,
                     fontFamily: "Roboto"),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Sintomas",
+                      hintText: "Digite seus sintomas",
+                    ),
                   ),
     
                 padding: const EdgeInsets.all(0.0),
