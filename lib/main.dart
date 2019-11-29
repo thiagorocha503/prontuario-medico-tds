@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget build(BuildContext context) {
       return new Scaffold(
         appBar: new AppBar(
-          title: new Text('App Name'),
+          title: new Text('Prontuário médico'),
           ),
         body:
           new Column(
