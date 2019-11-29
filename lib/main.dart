@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 void main() {
   runApp(new MyApp());
@@ -28,7 +29,23 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
     
+
+    DateTime selectedDate = new DateTime.now(); //data selecionada
     
+    Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null &&
+     picked != selectedDate)
+      print("Data selecionada: ${picked.toString()}");
+      setState(() {
+        this.selectedDate = picked;
+      });
+    }
     @override
     Widget build(BuildContext context) {
       return new Scaffold(
@@ -51,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
               
                 child:
                   new TextField(
+                    keyboardType: TextInputType.text,
                     style: new TextStyle(fontSize:12.0,
                     color: const Color(0xFF000000),
                     fontWeight: FontWeight.w200,
@@ -69,13 +87,14 @@ class _MyHomePageState extends State<MyHomePage> {
               new Container(
                 child:
                   new TextField(
+                    keyboardType: TextInputType.number,
                     style: new TextStyle(fontSize:12.0,
                     color: const Color(0xFF000000),
                     fontWeight: FontWeight.w200,
                     fontFamily: "Roboto"),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: "idade",
+                      labelText: "Idade",
                       hintText: "digite sua idade"
                     ),
                   ),
@@ -87,6 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
               new Container(
                 child:
                   new TextField(
+                    
                     style: new TextStyle(fontSize:12.0,
                     color: const Color(0xFF000000),
                     fontWeight: FontWeight.w200,
@@ -156,7 +176,9 @@ class _MyHomePageState extends State<MyHomePage> {
     
               new Container(
                 child:
-                  new RaisedButton(key:null, onPressed:buttonPressed,
+                  new RaisedButton(
+                    key:null,
+                    onPressed: (){},
                     color: Colors.blue,
                     child:
                       new Text(
@@ -170,6 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: const EdgeInsets.all(0.0),
                 alignment: Alignment.center,
               )
+              
             ]
     
           ),
@@ -180,4 +203,4 @@ class _MyHomePageState extends State<MyHomePage> {
     
     void radioChanged(double value) {}
     
-}
+} 
