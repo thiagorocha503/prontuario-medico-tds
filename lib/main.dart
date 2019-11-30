@@ -33,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _txtData = new TextEditingController();
   TextEditingController _txtSintomas = new TextEditingController();
   DateTime selectedDate = new DateTime.now(); //data selecionada
-
+  int GROUP_RADIO_BUTTON_SEXO = 1;
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
@@ -160,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontFamily: "Roboto"),
                         ),
                         new Radio(
-                            key: null,
+                            //key: null,
                             groupValue: null,
                             value: .5,
                             onChanged: radioChanged),
@@ -178,6 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 new Container(
                   child: new TextField(
+                    maxLines: 15,
                     style: new TextStyle(
                         fontSize: 12.0,
                         color: const Color(0xFF000000),
@@ -237,8 +238,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       Container( child: Text("14 Reyna A. R. A "),),
                       Container( child: Text("15 Lucas Casttelan "),),
                     ],
-                  ),                   
+                  ),
+                                     
                 ),
+                
               ]
             ),
         )
