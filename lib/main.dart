@@ -33,7 +33,9 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _txtData = new TextEditingController();
   TextEditingController _txtSintomas = new TextEditingController();
   DateTime selectedDate = new DateTime.now(); //data selecionada
-  int GROUP_RADIO_BUTTON_SEXO = 1;
+  int GROUP_RADIO_BUTTON_SEXO = 3;// nenhum radio button
+  int _radioButtonSelected = 0;
+
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
@@ -49,12 +51,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void onReset() {
-    //setState(() {
-    this._txtNome.text = "";
-    this._txtIdade.text = "";
-    this._txtData.text = "";
-    this._txtSintomas.text = "";
-    //});
+    setState(() {
+      this._txtNome.text = "";
+      this._txtIdade.text = "";
+      this._txtData.text = "";
+      this._txtSintomas.text = "";
+      this.GROUP_RADIO_BUTTON_SEXO = 3;
+    });
   }
 
   @override
@@ -146,11 +149,25 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
+                        new Container(
+                          margin: EdgeInsets.only(left: 8),
+                          child: Text("Sexo",
+                          style: new TextStyle(
+                              fontSize: 12.0,
+                              color: const Color(0xFF000000),
+                              fontWeight: FontWeight.w200,
+                              fontFamily: "Roboto"
+                            ),                  
+                        ), 
+                        ) ,
                         new Radio(
-                            key: null,
-                            groupValue: null,
-                            value: .5,
-                            onChanged: radioChanged),
+                            groupValue: this.GROUP_RADIO_BUTTON_SEXO,
+                            value: 1,//this.RADIO_BUTTON_MASCULINO_VALUE,
+                            activeColor: Colors.blue,
+                            onChanged: (int value){
+                              radioChanged(value);
+                            }
+                        ),
                         new Text(
                           "masculino",
                           style: new TextStyle(
@@ -160,10 +177,13 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontFamily: "Roboto"),
                         ),
                         new Radio(
-                            //key: null,
-                            groupValue: null,
-                            value: .5,
-                            onChanged: radioChanged),
+                            groupValue: this.GROUP_RADIO_BUTTON_SEXO,
+                            value: 2,//this.RADIO_BUTTON_FEMININO_VALUE,
+                            activeColor: Colors.blue,
+                            onChanged: (int value){
+                              radioChanged(value);
+                            }
+                        ),
                         new Text(
                           "feminino",
                           style: new TextStyle(
@@ -241,7 +261,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                                      
                 ),
-                
               ]
             ),
         )
@@ -250,5 +269,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void buttonPressed() {}
 
-  void radioChanged(double value) {}
+  void radioChanged(int value) {
+    setState(() {
+      this._radioButtonSelected = value; 
+        this.GROUP_RADIO_BUTTON_SEXO = value;
+    });
+  }
 }
