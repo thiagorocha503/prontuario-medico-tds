@@ -209,9 +209,40 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   padding: const EdgeInsets.all(0.0),
                   alignment: Alignment.center,
-                )
-              ]),
-        ));
+                ),
+                new Container(
+                  padding: EdgeInsets.all(5.0),
+                  margin: EdgeInsets.only(left: 5.0),
+                  child: Text("Protuários: ") 
+                ),
+                new Container(
+                  margin: const EdgeInsets.all(10.0),
+                  color: Colors.grey,
+                  height: 180.0,
+                  child: ListView(
+                    children: <Widget>[
+                      Container( child: Text("01 André"),),
+                      Container( child: Text("02 Percy Jackson"),),
+                      Container( child: Text("03 Annabeth"),),
+                      Container( child: Text("04 Leo Valdez"),),
+                      Container( child: Text("05 Franck"),),
+                      Container( child: Text("06 Hazel Levesque"),),
+                      Container( child: Text("07 Piper McLean"),),
+                      Container( child: Text("08 Nico di Angelo"),),
+                      Container( child: Text("09 Bianca di Angelo"),),
+                      Container( child: Text("10 Jason"),),
+                      Container( child: Text("11 Grover underwood"),),
+                      Container( child: Text("12 Thalia "),),
+                      Container( child: Text("13 Will Solangelo "),),
+                      Container( child: Text("14 Reyna A. R. A "),),
+                      Container( child: Text("15 Lucas Casttelan "),),
+                    ],
+                  ),                   
+                ),
+              ]
+            ),
+        )
+      );
   }
 
   void buttonPressed() {}
