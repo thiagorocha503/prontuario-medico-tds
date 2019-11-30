@@ -33,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _txtData = new TextEditingController();
   TextEditingController _txtSintomas = new TextEditingController();
   DateTime selectedDate = new DateTime.now(); //data selecionada
-  int GROUP_RADIO_BUTTON_SEXO = 3;// nenhum radio button
+  int GROUP_RADIO_BUTTON_SEXO = 3; // nenhum radio button
   int _radioButtonSelected = 0;
 
   Future<void> _selectDate(BuildContext context) async {
@@ -82,7 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 new Container(
                   padding: EdgeInsets.all(15),
-                  child: new Text("Dados clínicos",
+                  child: new Text(
+                    "Dados clínicos",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20.0,
@@ -151,23 +152,22 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: <Widget>[
                         new Container(
                           margin: EdgeInsets.only(left: 8),
-                          child: Text("Sexo",
-                          style: new TextStyle(
-                              fontSize: 12.0,
-                              color: const Color(0xFF000000),
-                              fontWeight: FontWeight.w200,
-                              fontFamily: "Roboto"
-                            ),                  
-                        ), 
-                        ) ,
+                          child: Text(
+                            "Sexo",
+                            style: new TextStyle(
+                                fontSize: 12.0,
+                                color: const Color(0xFF000000),
+                                fontWeight: FontWeight.w200,
+                                fontFamily: "Roboto"),
+                          ),
+                        ),
                         new Radio(
                             groupValue: this.GROUP_RADIO_BUTTON_SEXO,
-                            value: 1,//this.RADIO_BUTTON_MASCULINO_VALUE,
+                            value: 1, //this.RADIO_BUTTON_MASCULINO_VALUE,
                             activeColor: Colors.blue,
-                            onChanged: (int value){
+                            onChanged: (int value) {
                               radioChanged(value);
-                            }
-                        ),
+                            }),
                         new Text(
                           "masculino",
                           style: new TextStyle(
@@ -178,12 +178,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         new Radio(
                             groupValue: this.GROUP_RADIO_BUTTON_SEXO,
-                            value: 2,//this.RADIO_BUTTON_FEMININO_VALUE,
+                            value: 2, //this.RADIO_BUTTON_FEMININO_VALUE,
                             activeColor: Colors.blue,
-                            onChanged: (int value){
+                            onChanged: (int value) {
                               radioChanged(value);
-                            }
-                        ),
+                            }),
                         new Text(
                           "feminino",
                           style: new TextStyle(
@@ -232,47 +231,73 @@ class _MyHomePageState extends State<MyHomePage> {
                   alignment: Alignment.center,
                 ),
                 new Container(
-                  padding: EdgeInsets.all(5.0),
-                  margin: EdgeInsets.only(left: 5.0),
-                  child: Text("Protuários: ") 
-                ),
+                    padding: EdgeInsets.all(5.0),
+                    margin: EdgeInsets.only(left: 5.0),
+                    child: Text("Protuários: ")),
                 new Container(
                   margin: const EdgeInsets.all(10.0),
                   color: Colors.grey,
                   height: 180.0,
                   child: ListView(
                     children: <Widget>[
-                      Container( child: Text("01 André"),),
-                      Container( child: Text("02 Percy Jackson"),),
-                      Container( child: Text("03 Annabeth"),),
-                      Container( child: Text("04 Leo Valdez"),),
-                      Container( child: Text("05 Franck"),),
-                      Container( child: Text("06 Hazel Levesque"),),
-                      Container( child: Text("07 Piper McLean"),),
-                      Container( child: Text("08 Nico di Angelo"),),
-                      Container( child: Text("09 Bianca di Angelo"),),
-                      Container( child: Text("10 Jason"),),
-                      Container( child: Text("11 Grover underwood"),),
-                      Container( child: Text("12 Thalia "),),
-                      Container( child: Text("13 Will Solangelo "),),
-                      Container( child: Text("14 Reyna A. R. A "),),
-                      Container( child: Text("15 Lucas Casttelan "),),
+                      Container(
+                        child: Text("01 André"),
+                      ),
+                      Container(
+                        child: Text("02 Percy Jackson"),
+                      ),
+                      Container(
+                        child: Text("03 Annabeth"),
+                      ),
+                      Container(
+                        child: Text("04 Leo Valdez"),
+                      ),
+                      Container(
+                        child: Text("05 Franck"),
+                      ),
+                      Container(
+                        child: Text("06 Hazel Levesque"),
+                      ),
+                      Container(
+                        child: Text("07 Piper McLean"),
+                      ),
+                      Container(
+                        child: Text("08 Nico di Angelo"),
+                      ),
+                      Container(
+                        child: Text("09 Bianca di Angelo"),
+                      ),
+                      Container(
+                        child: Text("10 Jason"),
+                      ),
+                      Container(
+                        child: Text("11 Grover underwood"),
+                      ),
+                      Container(
+                        child: Text("12 Thalia "),
+                      ),
+                      Container(
+                        child: Text("13 Will Solangelo "),
+                      ),
+                      Container(
+                        child: Text("14 Reyna A. R. A "),
+                      ),
+                      Container(
+                        child: Text("15 Lucas Casttelan "),
+                      ),
                     ],
                   ),
-                                     
                 ),
-              ]
-            ),
-        )
-      );
+              ]),
+        ));
   }
 
   void buttonPressed() {}
 
   void radioChanged(int value) {
     setState(() {
-      this._radioButtonSelected = value; 
-        this.GROUP_RADIO_BUTTON_SEXO = value;
+      this._radioButtonSelected = value;
+      this.GROUP_RADIO_BUTTON_SEXO = value;
     });
   }
 }
