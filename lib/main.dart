@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart' as prefix0;
+
 void main() {
   runApp(new MyApp());
 }
@@ -28,13 +30,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   TextEditingController _txtNome = new TextEditingController();
   TextEditingController _txtIdade = new TextEditingController();
   TextEditingController _txtData = new TextEditingController();
   TextEditingController _txtSintomas = new TextEditingController();
   DateTime selectedDate = new DateTime.now(); //data selecionada
-  int GROUP_RADIO_BUTTON_SEXO = 3; // nenhum radio button
+  int GROUP_RADIO_BUTTON_SEXO = 0; // nenhum radio button
   int _radioButtonSelected = 0;
+  String radioButton_info = "";
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -50,6 +54,21 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void onCadastar(){
+    String nome = this._txtNome.text;
+    int idade = int.parse(this._txtIdade.text);
+    String data = this._txtData.text;
+    int sexo = this.GROUP_RADIO_BUTTON_SEXO;
+    String sintomas = this._txtSintomas.text;
+  }
+
+  bool isRadioButtonSelected(){
+    if (GROUP_RADIO_BUTTON_SEXO == 1 || GROUP_RADIO_BUTTON_SEXO == 2){
+      return true;
+    } else {
+      return false;
+    }
+  }
   void onReset() {
     setState(() {
       this._txtNome.text = "";
@@ -57,6 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
       this._txtData.text = "";
       this._txtSintomas.text = "";
       this.GROUP_RADIO_BUTTON_SEXO = 3;
+      this._formKey = GlobalKey<FormState>();
+      this.radioButton_info = "";
     });
   }
 
@@ -75,7 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         body: SingleChildScrollView(
-          child: new Column(
+          child: new Form(
+            key: this._formKey,
+            child: new Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -93,42 +116,54 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 new Container(
-                  child: new TextField(
+                  child: new TextFormField(
                     keyboardType: TextInputType.text,
-                    style: new TextStyle(
-                        fontSize: 12.0,
-                        color: const Color(0xFF000000),
-                        fontWeight: FontWeight.w200,
-                        fontFamily: "Roboto"),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: "Nome",
                       hintText: "Digite o seu nome",
                     ),
+                    style: new TextStyle(
+                        fontSize: 12.0,
+                        color: const Color(0xFF000000),
+                        fontWeight: FontWeight.w200,
+                        fontFamily: "Roboto"
+                    ),
+                    validator: (value){
+                      if (value.isEmpty){
+                        return "Insira seu nome";
+                      }
+                    },
                     controller: this._txtNome,
                   ),
                   padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                   alignment: Alignment.center,
                 ),
                 new Container(
-                  child: new TextField(
+                  child: new TextFormField(
                     keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Idade",
+                        hintText: "digite sua idade"
+                    ),
                     style: new TextStyle(
                         fontSize: 12.0,
                         color: const Color(0xFF000000),
                         fontWeight: FontWeight.w200,
                         fontFamily: "Roboto"),
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: "Idade",
-                        hintText: "digite sua idade"),
                     controller: this._txtIdade,
+                    validator: (value){
+                      if (value.isEmpty) {
+                        return "Insira sua idade";
+                      }
+                    },
                   ),
                   padding: const EdgeInsets.all(5.0),
                   alignment: Alignment.center,
                 ),
                 new Container(
-                  child: new TextField(
+                  child: new TextFormField(
                     style: new TextStyle(
                         fontSize: 12.0,
                         color: const Color(0xFF000000),
@@ -140,6 +175,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       hintText: "Digite a data da consulta",
                     ),
                     controller: this._txtData,
+                    validator: (value){
+                      if (value.isEmpty) {
+                        return "Insira a data";
+                      }                      
+                    }
                   ),
                   padding: const EdgeInsets.all(5.0),
                   alignment: Alignment.center,
@@ -182,7 +222,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             activeColor: Colors.blue,
                             onChanged: (int value) {
                               radioChanged(value);
-                            }),
+                            }
+                        ),    
                         new Text(
                           "feminino",
                           style: new TextStyle(
@@ -195,28 +236,37 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: const EdgeInsets.all(5.0),
                   alignment: Alignment.center,
                 ),
+                Container(
+                  padding: EdgeInsets.only(right: 5.0,top:0.0, bottom: 15, left: 5.0),
+                  child: Text(this.radioButton_info,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
                 new Container(
-                  child: new TextField(
+                  child: new TextFormField(
                     maxLines: 15,
-                    style: new TextStyle(
-                        fontSize: 12.0,
-                        color: const Color(0xFF000000),
-                        fontWeight: FontWeight.w200,
-                        fontFamily: "Roboto"),
-                    decoration: InputDecoration(
+                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: "Sintomas",
                       hintText: "Digite seus sintomas",
                     ),
+                    style: new TextStyle(
+                        fontSize: 12.0,
+                        color: const Color(0xFF000000),
+                        fontWeight: FontWeight.w200,
+                        fontFamily: "Roboto"),                  
                     controller: this._txtSintomas,
+                    validator: (value){
+                      if (value.isEmpty) {
+                        return "Digite seus sintomas";
+                      }
+                    },
                   ),
                   padding: const EdgeInsets.all(5.0),
                   alignment: Alignment.center,
                 ),
                 new Container(
-                  child: new RaisedButton(
-                    key: null,
-                    onPressed: () {},
+                  child: new RaisedButton(           
                     color: Colors.blue,
                     child: new Text(
                       "Cadastrar",
@@ -226,6 +276,21 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontWeight: FontWeight.w200,
                           fontFamily: "Roboto"),
                     ),
+                    onPressed: () {
+                      bool formValidate = this._formKey.currentState.validate();
+                      bool radioSelected = this.isRadioButtonSelected();
+                      setState(() {
+                        if(radioSelected){
+                          this.radioButton_info = "";
+                        } else {
+                          this.radioButton_info = "Selecione o seu sexo";
+                        }
+                      }); 
+                      if (formValidate && this.isRadioButtonSelected()){
+                        this.onCadastar();
+                      }             
+                      
+                    },
                   ),
                   padding: const EdgeInsets.all(0.0),
                   alignment: Alignment.center,
@@ -288,8 +353,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                 ),
-              ]),
-        ));
+              ]
+            ),
+          )
+        )
+      );
   }
 
   void buttonPressed() {}
