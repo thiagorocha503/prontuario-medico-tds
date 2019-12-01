@@ -38,7 +38,8 @@ class _MyHomePageState extends State<MyHomePage> {
   DateTime selectedDate = new DateTime.now(); //data selecionada
   int GROUP_RADIO_BUTTON_SEXO = 0; // nenhum radio button
   int _radioButtonSelected = 0;
-  String radioButton_info = "";
+  String _radioButtonInfo = "";
+  final double FONT_SIZE_TEXT_INPUT = 18.0;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -77,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
       this._txtSintomas.text = "";
       this.GROUP_RADIO_BUTTON_SEXO = 3;
       this._formKey = GlobalKey<FormState>();
-      this.radioButton_info = "";
+      this._radioButtonInfo = "";
     });
   }
 
@@ -124,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       hintText: "Digite o seu nome",
                     ),
                     style: new TextStyle(
-                        fontSize: 18.0,
+                        fontSize: FONT_SIZE_TEXT_INPUT,
                         color: const Color(0xFF000000),
                         fontWeight: FontWeight.w200,
                         fontFamily: "Roboto"
@@ -148,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         hintText: "digite sua idade"
                     ),
                     style: new TextStyle(
-                        fontSize: 18.0,
+                        fontSize: FONT_SIZE_TEXT_INPUT,
                         color: const Color(0xFF000000),
                         fontWeight: FontWeight.w200,
                         fontFamily: "Roboto"),
@@ -165,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 new Container(
                   child: new TextFormField(
                     style: new TextStyle(
-                        fontSize: 18.0,
+                        fontSize: FONT_SIZE_TEXT_INPUT,
                         color: const Color(0xFF000000),
                         fontWeight: FontWeight.w200,
                         fontFamily: "Roboto"),
@@ -238,7 +239,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Container(
                   padding: EdgeInsets.only(right: 5.0,top:0.0, bottom: 15, left: 5.0),
-                  child: Text(this.radioButton_info,
+                  child: Text(this._radioButtonInfo,
                     style: TextStyle(color: Colors.red),
                   ),
                 ),
@@ -251,7 +252,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       hintText: "Digite seus sintomas",
                     ),
                     style: new TextStyle(
-                        fontSize: 18.0,
+                        fontSize: FONT_SIZE_TEXT_INPUT,
                         color: const Color(0xFF000000),
                         fontWeight: FontWeight.w200,
                         fontFamily: "Roboto"),                  
@@ -281,9 +282,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       bool radioSelected = this.isRadioButtonSelected();
                       setState(() {
                         if(radioSelected){
-                          this.radioButton_info = "";
+                          this._radioButtonInfo = "";
                         } else {
-                          this.radioButton_info = "Selecione o seu sexo";
+                          this._radioButtonInfo = "Selecione o seu sexo";
                         }
                       }); 
                       if (formValidate && this.isRadioButtonSelected()){
