@@ -361,8 +361,6 @@ class _MyHomePageState extends State<MyHomePage> {
       );
   }
 
-  void buttonPressed() {}
-
   void radioChanged(int value) {
     setState(() {
       this._radioButtonSelected = value;
