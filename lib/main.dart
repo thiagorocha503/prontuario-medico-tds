@@ -124,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       hintText: "Digite o seu nome",
                     ),
                     style: new TextStyle(
-                        fontSize: 12.0,
+                        fontSize: 18.0,
                         color: const Color(0xFF000000),
                         fontWeight: FontWeight.w200,
                         fontFamily: "Roboto"
@@ -148,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         hintText: "digite sua idade"
                     ),
                     style: new TextStyle(
-                        fontSize: 12.0,
+                        fontSize: 18.0,
                         color: const Color(0xFF000000),
                         fontWeight: FontWeight.w200,
                         fontFamily: "Roboto"),
@@ -165,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 new Container(
                   child: new TextFormField(
                     style: new TextStyle(
-                        fontSize: 12.0,
+                        fontSize: 18.0,
                         color: const Color(0xFF000000),
                         fontWeight: FontWeight.w200,
                         fontFamily: "Roboto"),
@@ -195,7 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Text(
                             "Sexo",
                             style: new TextStyle(
-                                fontSize: 12.0,
+                                fontSize: 13.0,
                                 color: const Color(0xFF000000),
                                 fontWeight: FontWeight.w200,
                                 fontFamily: "Roboto"),
@@ -211,7 +211,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         new Text(
                           "masculino",
                           style: new TextStyle(
-                              fontSize: 12.0,
+                              fontSize: 13.0,
                               color: const Color(0xFF000000),
                               fontWeight: FontWeight.w200,
                               fontFamily: "Roboto"),
@@ -227,7 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         new Text(
                           "feminino",
                           style: new TextStyle(
-                              fontSize: 12.0,
+                              fontSize: 13.0,
                               color: const Color(0xFF000000),
                               fontWeight: FontWeight.w200,
                               fontFamily: "Roboto"),
@@ -251,7 +251,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       hintText: "Digite seus sintomas",
                     ),
                     style: new TextStyle(
-                        fontSize: 12.0,
+                        fontSize: 18.0,
                         color: const Color(0xFF000000),
                         fontWeight: FontWeight.w200,
                         fontFamily: "Roboto"),                  
@@ -265,14 +265,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: const EdgeInsets.all(5.0),
                   alignment: Alignment.center,
                 ),
-                new Container(
-                  child: new RaisedButton(           
+                new Container(                 
+                  child: new RaisedButton(         
                     color: Colors.blue,
                     child: new Text(
                       "Cadastrar",
                       style: new TextStyle(
-                          fontSize: 12.0,
-                          color: const Color(0xFF000000),
+                          fontSize: 15.0,
+                          color: Colors.white,
                           fontWeight: FontWeight.w200,
                           fontFamily: "Roboto"),
                     ),
