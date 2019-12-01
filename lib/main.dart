@@ -299,7 +299,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 new Container(
                     padding: EdgeInsets.all(5.0),
                     margin: EdgeInsets.only(left: 5.0),
-                    child: Text("Protuários: ")),
+                    child:
+                      Text("Protuários: ",
+                        style: new TextStyle(
+                          fontSize: 15,
+                          color: const Color(0xFF000000),
+                          fontWeight: FontWeight.w200,
+                          fontFamily: "Roboto"
+                      ),
+                    )
+                ),
                 new Container(
                   margin: const EdgeInsets.all(10.0),
                   color: Colors.grey,
