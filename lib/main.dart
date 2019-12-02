@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void onCadastar(){
+  void onCadastar() {
     String nome = this._txtNome.text;
     int idade = int.parse(this._txtIdade.text);
     String data = this._txtData.text;
@@ -64,13 +64,14 @@ class _MyHomePageState extends State<MyHomePage> {
     String sintomas = this._txtSintomas.text;
   }
 
-  bool isRadioButtonSelected(){
-    if (GROUP_RADIO_BUTTON_SEXO == 1 || GROUP_RADIO_BUTTON_SEXO == 2){
+  bool isRadioButtonSelected() {
+    if (GROUP_RADIO_BUTTON_SEXO == 1 || GROUP_RADIO_BUTTON_SEXO == 2) {
       return true;
     } else {
       return false;
     }
   }
+
   void onReset() {
     setState(() {
       this._txtNome.text = "";
@@ -98,9 +99,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         body: SingleChildScrollView(
-          child: new Form(
-            key: this._formKey,
-            child: new Column(
+            child: new Form(
+          key: this._formKey,
+          child: new Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -131,8 +132,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         fontWeight: FontWeight.w200,
                         fontFamily: "Roboto"
                     ),
-                    validator: (value){
-                      if (value.isEmpty){
+                    validator: (value) {
+                      if (value.isEmpty) {
                         return "Insira seu nome";
                       }
                     },
@@ -153,9 +154,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         fontSize: FONT_SIZE_TEXT_INPUT,
                         color: const Color(0xFF000000),
                         fontWeight: FontWeight.w200,
-                        fontFamily: "Roboto"),
+                        fontFamily: "Roboto"
+                    ),
                     controller: this._txtIdade,
-                    validator: (value){
+                    validator: (value) {
                       if (value.isEmpty) {
                         return "Insira sua idade";
                       }
@@ -168,38 +170,41 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        flex: 5,
-                        child:TextFormField(
-                        style: new TextStyle(
-                          fontSize: FONT_SIZE_TEXT_INPUT,
-                          color: const Color(0xFF000000),
-                          fontWeight: FontWeight.w200,
-                          fontFamily: "Roboto"
-                        ),
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: "Data",
-                          hintText: "Digite a data da consulta",
-                        ),
-                        controller: this._txtData,
-                        validator: (value){
-                            if (value.isEmpty) {
-                              return "Insira a data";
-                            }                      
-                          }
-                        )
-                      ),
+                          flex: 5,
+                          child: TextFormField(
+                              style: new TextStyle(
+                                  fontSize: FONT_SIZE_TEXT_INPUT,
+                                  color: const Color(0xFF000000),
+                                  fontWeight: FontWeight.w200,
+                                  fontFamily: "Roboto"),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: "Data",
+                                hintText: "Digite a data da consulta",
+                              ),
+                              controller: this._txtData,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Insira a data";
+                                }
+                              }
+                          )
+                       )
+                      ,
                       Expanded(
                         flex: 1,
-                          child: IconButton(
-                          icon: Icon(Icons.calendar_today, color: Colors.blue,),
-                          onPressed: (){
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.calendar_today,
+                            color: Colors.blue,
+                          ),
+                          onPressed: () {
                             this._selectDate(context);
                           },
                         ),
                       )
                     ],
-                  ) ,
+                  ),
                   padding: const EdgeInsets.all(5.0),
                   alignment: Alignment.center,
                 ),
@@ -217,7 +222,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 fontSize: 13.0,
                                 color: const Color(0xFF000000),
                                 fontWeight: FontWeight.w200,
-                                fontFamily: "Roboto"),
+                                fontFamily: "Roboto"
+                            ),
                           ),
                         ),
                         new Radio(
@@ -226,14 +232,16 @@ class _MyHomePageState extends State<MyHomePage> {
                             activeColor: Colors.blue,
                             onChanged: (int value) {
                               radioChanged(value);
-                            }),
+                            }
+                        ),
                         new Text(
                           "masculino",
                           style: new TextStyle(
                               fontSize: 13.0,
                               color: const Color(0xFF000000),
                               fontWeight: FontWeight.w200,
-                              fontFamily: "Roboto"),
+                              fontFamily: "Roboto"
+                          ),
                         ),
                         new Radio(
                             groupValue: this.GROUP_RADIO_BUTTON_SEXO,
@@ -242,7 +250,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             onChanged: (int value) {
                               radioChanged(value);
                             }
-                        ),    
+                        ),
                         new Text(
                           "feminino",
                           style: new TextStyle(
@@ -251,20 +259,23 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontWeight: FontWeight.w200,
                               fontFamily: "Roboto"),
                         )
-                      ]),
+                      ]
+                  ),
                   padding: const EdgeInsets.all(5.0),
                   alignment: Alignment.center,
                 ),
                 Container(
-                  padding: EdgeInsets.only(right: 5.0,top:0.0, bottom: 15, left: 5.0),
-                  child: Text(this._radioButtonInfo,
+                  padding: EdgeInsets.only(
+                      right: 5.0, top: 0.0, bottom: 15, left: 5.0),
+                  child: Text(
+                    this._radioButtonInfo,
                     style: TextStyle(color: Colors.red),
                   ),
                 ),
                 new Container(
                   child: new TextFormField(
                     maxLines: 15,
-                     decoration: InputDecoration(
+                    decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: "Sintomas",
                       hintText: "Digite seus sintomas",
@@ -273,9 +284,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         fontSize: FONT_SIZE_TEXT_INPUT,
                         color: const Color(0xFF000000),
                         fontWeight: FontWeight.w200,
-                        fontFamily: "Roboto"),                  
+                        fontFamily: "Roboto"
+                    ),
                     controller: this._txtSintomas,
-                    validator: (value){
+                    validator: (value) {
                       if (value.isEmpty) {
                         return "Digite seus sintomas";
                       }
@@ -284,8 +296,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: const EdgeInsets.all(5.0),
                   alignment: Alignment.center,
                 ),
-                new Container(                 
-                  child: new RaisedButton(         
+                new Container(
+                  child: new RaisedButton(
                     color: Colors.blue,
                     child: new Text(
                       "Cadastrar",
@@ -293,22 +305,23 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontSize: 15.0,
                           color: Colors.white,
                           fontWeight: FontWeight.w200,
-                          fontFamily: "Roboto"),
+                          fontFamily: "Roboto"
+                      ),
                     ),
                     onPressed: () {
                       bool formValidate = this._formKey.currentState.validate();
                       bool radioSelected = this.isRadioButtonSelected();
                       setState(() {
-                        if(radioSelected){
-                          this._radioButtonInfo = "";
-                        } else {
-                          this._radioButtonInfo = "Selecione o seu sexo";
+                          if (radioSelected) {
+                            this._radioButtonInfo = "";
+                          } else {
+                            this._radioButtonInfo = "Selecione o seu sexo";
+                          }
                         }
-                      }); 
-                      if (formValidate && this.isRadioButtonSelected()){
+                      );
+                      if (formValidate && this.isRadioButtonSelected()) {
                         this.onCadastar();
-                      }             
-                      
+                      }
                     },
                   ),
                   padding: const EdgeInsets.all(0.0),
@@ -317,9 +330,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 new Container(
                     padding: EdgeInsets.all(5.0),
                     margin: EdgeInsets.only(left: 5.0),
-                    child:
-                      Text("Protuários: ",
-                        style: new TextStyle(
+                    child: Text(
+                      "Protuários: ",
+                      style: new TextStyle(
                           fontSize: 15,
                           color: const Color(0xFF000000),
                           fontWeight: FontWeight.w200,
@@ -382,10 +395,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ]
-            ),
-          )
+          ),
         )
-      );
+       )
+    );
   }
 
   void radioChanged(int value) {
