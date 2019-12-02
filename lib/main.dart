@@ -98,7 +98,18 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-        body: SingleChildScrollView(
+        body: 
+           Stack(
+        children: <Widget>[
+          Center(
+            child: new Image.asset(
+              'images/background.jpg',
+              width:500,
+              height: 1000,
+              fit: BoxFit.fill,
+            ),
+          ),
+          SingleChildScrollView(
           padding: EdgeInsets.fromLTRB(10, 15, 10, 5),
           child: new Form(
           key: this._formKey,
@@ -401,6 +412,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         )
        )
+       ],
+       ),
     );
   }
 
