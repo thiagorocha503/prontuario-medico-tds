@@ -99,7 +99,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         body: SingleChildScrollView(
-            child: new Form(
+          padding: EdgeInsets.fromLTRB(10, 15, 10, 5),
+          child: new Form(
           key: this._formKey,
           child: new Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -176,7 +177,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   fontSize: FONT_SIZE_TEXT_INPUT,
                                   color: const Color(0xFF000000),
                                   fontWeight: FontWeight.w200,
-                                  fontFamily: "Roboto"),
+                                  fontFamily: "Roboto"
+                              ),
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 labelText: "Data",
@@ -257,7 +259,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 13.0,
                               color: const Color(0xFF000000),
                               fontWeight: FontWeight.w200,
-                              fontFamily: "Roboto"),
+                              fontFamily: "Roboto"
+                          ),
                         )
                       ]
                   ),
@@ -331,7 +334,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: EdgeInsets.all(5.0),
                     margin: EdgeInsets.only(left: 5.0),
                     child: Text(
-                      "Protuários: ",
+                      "Prontuários: ",
                       style: new TextStyle(
                           fontSize: 15,
                           color: const Color(0xFF000000),
