@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           Center(
             child: new Image.asset(
-              'images/background.jpg',
+              'assets/images/background.jpg',
               width:500,
               height: 1000,
               fit: BoxFit.fill,
