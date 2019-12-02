@@ -87,333 +87,328 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Prontuário médico'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.refresh),
-              onPressed: () {
-                this.onReset();
-              },
-            ),
-          ],
-        ),
-        body: 
-           Stack(
+      appBar: new AppBar(
+        title: new Text('Prontuário médico'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () {
+              this.onReset();
+            },
+          ),
+        ],
+      ),
+      body: Stack(
         children: <Widget>[
           Center(
             child: new Image.asset(
               'assets/images/background.jpg',
-              width:500,
+              width: 500,
               height: 1000,
               fit: BoxFit.fill,
             ),
           ),
           SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(10, 15, 10, 5),
-          child: new Form(
-          key: this._formKey,
-          child: new Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                new Container(
-                  padding: EdgeInsets.all(15),
-                  child: new Text(
-                    "Dados clínicos",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue,
-                    ),
-                  ),
-                ),
-                new Container(
-                  child: new TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Nome",
-                      hintText: "Digite o seu nome",
-                    ),
-                    style: new TextStyle(
-                        fontSize: FONT_SIZE_TEXT_INPUT,
-                        color: const Color(0xFF000000),
-                        fontWeight: FontWeight.w200,
-                        fontFamily: "Roboto"
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return "Insira seu nome";
-                      }
-                    },
-                    controller: this._txtNome,
-                  ),
-                  padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-                  alignment: Alignment.center,
-                ),
-                new Container(
-                  child: new TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: "Idade",
-                        hintText: "digite sua idade"
-                    ),
-                    style: new TextStyle(
-                        fontSize: FONT_SIZE_TEXT_INPUT,
-                        color: const Color(0xFF000000),
-                        fontWeight: FontWeight.w200,
-                        fontFamily: "Roboto"
-                    ),
-                    controller: this._txtIdade,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return "Insira sua idade";
-                      }
-                    },
-                  ),
-                  padding: const EdgeInsets.all(5.0),
-                  alignment: Alignment.center,
-                ),
-                new Container(
-                  child: Row(
+              padding: EdgeInsets.fromLTRB(10, 15, 10, 5),
+              child: new Form(
+                key: this._formKey,
+                child: new Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Expanded(
-                          flex: 5,
-                          child: TextFormField(
-                              style: new TextStyle(
-                                  fontSize: FONT_SIZE_TEXT_INPUT,
-                                  color: const Color(0xFF000000),
-                                  fontWeight: FontWeight.w200,
-                                  fontFamily: "Roboto"
-                              ),
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: "Data",
-                                hintText: "Digite a data da consulta",
-                              ),
-                              controller: this._txtData,
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return "Insira a data";
-                                }
-                              }
-                          )
-                       )
-                      ,
-                      Expanded(
-                        flex: 1,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.calendar_today,
+                      new Container(
+                        padding: EdgeInsets.all(15),
+                        child: new Text(
+                          "Dados clínicos",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
                             color: Colors.blue,
                           ),
-                          onPressed: () {
-                            this._selectDate(context);
+                        ),
+                      ),
+                      new Container(
+                        child: new TextFormField(
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Nome",
+                            hintText: "Digite o seu nome",
+                          ),
+                          style: new TextStyle(
+                              fontSize: FONT_SIZE_TEXT_INPUT,
+                              color: const Color(0xFF000000),
+                              fontWeight: FontWeight.w200,
+                              fontFamily: "Roboto"),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return "Insira seu nome";
+                            }
+                          },
+                          controller: this._txtNome,
+                        ),
+                        padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                        alignment: Alignment.center,
+                      ),
+                      new Container(
+                        child: new TextFormField(
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Idade",
+                              hintText: "digite sua idade"
+                          ),
+                          style: new TextStyle(
+                              fontSize: FONT_SIZE_TEXT_INPUT,
+                              color: const Color(0xFF000000),
+                              fontWeight: FontWeight.w200,
+                              fontFamily: "Roboto"),
+                          controller: this._txtIdade,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return "Insira sua idade";
+                            }
                           },
                         ),
-                      )
-                    ],
-                  ),
-                  padding: const EdgeInsets.all(5.0),
-                  alignment: Alignment.center,
-                ),
-                new Container(
-                  child: new Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        new Container(
-                          margin: EdgeInsets.only(left: 8),
-                          child: Text(
-                            "Sexo",
+                        padding: const EdgeInsets.all(5.0),
+                        alignment: Alignment.center,
+                      ),
+                      new Container(
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                                flex: 5,
+                                child: TextFormField(
+                                    style: new TextStyle(
+                                        fontSize: FONT_SIZE_TEXT_INPUT,
+                                        color: const Color(0xFF000000),
+                                        fontWeight: FontWeight.w200,
+                                        fontFamily: "Roboto"
+                                    ),
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: "Data",
+                                      hintText: "Digite a data da consulta",
+                                    ),
+                                    controller: this._txtData,
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return "Insira a data";
+                                      }
+                                    }
+                                  )
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.calendar_today,
+                                  color: Colors.blue,
+                                ),
+                                onPressed: () {
+                                  this._selectDate(context);
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                        padding: const EdgeInsets.all(5.0),
+                        alignment: Alignment.center,
+                      ),
+                      new Container(
+                        child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              new Container(
+                                margin: EdgeInsets.only(left: 8),
+                                child: Text(
+                                  "Sexo",
+                                  style: new TextStyle(
+                                      fontSize: 13.0,
+                                      color: const Color(0xFF000000),
+                                      fontWeight: FontWeight.w200,
+                                      fontFamily: "Roboto"
+                                  ),
+                                ),
+                              ),
+                              new Radio(
+                                  groupValue: this.GROUP_RADIO_BUTTON_SEXO,
+                                  value: 1, //this.RADIO_BUTTON_MASCULINO_VALUE,
+                                  activeColor: Colors.blue,
+                                  onChanged: (int value) {
+                                    radioChanged(value);
+                                  }
+                              ),
+                              new Text(
+                                "masculino",
+                                style: new TextStyle(
+                                    fontSize: 13.0,
+                                    color: const Color(0xFF000000),
+                                    fontWeight: FontWeight.w200,
+                                    fontFamily: "Roboto"
+                                ),
+                              ),
+                              new Radio(
+                                  groupValue: this.GROUP_RADIO_BUTTON_SEXO,
+                                  value: 2, //this.RADIO_BUTTON_FEMININO_VALUE,
+                                  activeColor: Colors.blue,
+                                  onChanged: (int value) {
+                                    radioChanged(value);
+                                  }
+                              ),
+                              new Text(
+                                "feminino",
+                                style: new TextStyle(
+                                    fontSize: 13.0,
+                                    color: const Color(0xFF000000),
+                                    fontWeight: FontWeight.w200,
+                                    fontFamily: "Roboto"),
+                              )
+                            ]
+                        ),
+                        padding: const EdgeInsets.all(5.0),
+                        alignment: Alignment.center,
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                            right: 5.0, top: 0.0, bottom: 15, left: 5.0
+                        ),
+                        child: Text(
+                          this._radioButtonInfo,
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ),
+                      new Container(
+                        child: new TextFormField(
+                          maxLines: 15,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Sintomas",
+                            hintText: "Digite seus sintomas",
+                          ),
+                          style: new TextStyle(
+                              fontSize: FONT_SIZE_TEXT_INPUT,
+                              color: const Color(0xFF000000),
+                              fontWeight: FontWeight.w200,
+                              fontFamily: "Roboto"
+                          ),
+                          controller: this._txtSintomas,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return "Digite seus sintomas";
+                            }
+                          },
+                        ),
+                        padding: const EdgeInsets.all(5.0),
+                        alignment: Alignment.center,
+                      ),
+                      new Container(
+                        child: new RaisedButton(
+                          color: Colors.blue,
+                          child: new Text(
+                            "Cadastrar",
                             style: new TextStyle(
-                                fontSize: 13.0,
-                                color: const Color(0xFF000000),
+                                fontSize: 15.0,
+                                color: Colors.white,
                                 fontWeight: FontWeight.w200,
                                 fontFamily: "Roboto"
                             ),
                           ),
-                        ),
-                        new Radio(
-                            groupValue: this.GROUP_RADIO_BUTTON_SEXO,
-                            value: 1, //this.RADIO_BUTTON_MASCULINO_VALUE,
-                            activeColor: Colors.blue,
-                            onChanged: (int value) {
-                              radioChanged(value);
+                          onPressed: () {
+                            bool formValidate =
+                                this._formKey.currentState.validate();
+                            bool radioSelected = this.isRadioButtonSelected();
+                            setState(() {
+                              if (radioSelected) {
+                                this._radioButtonInfo = "";
+                              } else {
+                                this._radioButtonInfo = "Selecione o seu sexo";
+                              }
+                            });
+                            if (formValidate && this.isRadioButtonSelected()) {
+                              this.onCadastar();
                             }
+                          },
                         ),
-                        new Text(
-                          "masculino",
-                          style: new TextStyle(
-                              fontSize: 13.0,
-                              color: const Color(0xFF000000),
-                              fontWeight: FontWeight.w200,
-                              fontFamily: "Roboto"
-                          ),
+                        padding: const EdgeInsets.all(0.0),
+                        alignment: Alignment.center,
+                      ),
+                      new Container(
+                          padding: EdgeInsets.all(5.0),
+                          margin: EdgeInsets.only(left: 5.0),
+                          child: Text(
+                            "Prontuários: ",
+                            style: new TextStyle(
+                                fontSize: 15,
+                                color: const Color(0xFF000000),
+                                fontWeight: FontWeight.w200,
+                                fontFamily: "Roboto"),
+                          )
+                      ),
+                      new Container(
+                        margin: const EdgeInsets.all(10.0),
+                        color: Colors.grey,
+                        height: 180.0,
+                        child: ListView(
+                          children: <Widget>[
+                            Container(
+                              child: Text("01 André"),
+                            ),
+                            Container(
+                              child: Text("02 Percy Jackson"),
+                            ),
+                            Container(
+                              child: Text("03 Annabeth"),
+                            ),
+                            Container(
+                              child: Text("04 Leo Valdez"),
+                            ),
+                            Container(
+                              child: Text("05 Franck"),
+                            ),
+                            Container(
+                              child: Text("06 Hazel Levesque"),
+                            ),
+                            Container(
+                              child: Text("07 Piper McLean"),
+                            ),
+                            Container(
+                              child: Text("08 Nico di Angelo"),
+                            ),
+                            Container(
+                              child: Text("09 Bianca di Angelo"),
+                            ),
+                            Container(
+                              child: Text("10 Jason"),
+                            ),
+                            Container(
+                              child: Text("11 Grover underwood"),
+                            ),
+                            Container(
+                              child: Text("12 Thalia "),
+                            ),
+                            Container(
+                              child: Text("13 Will Solangelo "),
+                            ),
+                            Container(
+                              child: Text("14 Reyna A. R. A "),
+                            ),
+                            Container(
+                              child: Text("15 Lucas Casttelan "),
+                            ),
+                          ],
                         ),
-                        new Radio(
-                            groupValue: this.GROUP_RADIO_BUTTON_SEXO,
-                            value: 2, //this.RADIO_BUTTON_FEMININO_VALUE,
-                            activeColor: Colors.blue,
-                            onChanged: (int value) {
-                              radioChanged(value);
-                            }
-                        ),
-                        new Text(
-                          "feminino",
-                          style: new TextStyle(
-                              fontSize: 13.0,
-                              color: const Color(0xFF000000),
-                              fontWeight: FontWeight.w200,
-                              fontFamily: "Roboto"
-                          ),
-                        )
-                      ]
+                      ),
+                    ]
                   ),
-                  padding: const EdgeInsets.all(5.0),
-                  alignment: Alignment.center,
-                ),
-                Container(
-                  padding: EdgeInsets.only(
-                      right: 5.0, top: 0.0, bottom: 15, left: 5.0),
-                  child: Text(
-                    this._radioButtonInfo,
-                    style: TextStyle(color: Colors.red),
-                  ),
-                ),
-                new Container(
-                  child: new TextFormField(
-                    maxLines: 15,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Sintomas",
-                      hintText: "Digite seus sintomas",
-                    ),
-                    style: new TextStyle(
-                        fontSize: FONT_SIZE_TEXT_INPUT,
-                        color: const Color(0xFF000000),
-                        fontWeight: FontWeight.w200,
-                        fontFamily: "Roboto"
-                    ),
-                    controller: this._txtSintomas,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return "Digite seus sintomas";
-                      }
-                    },
-                  ),
-                  padding: const EdgeInsets.all(5.0),
-                  alignment: Alignment.center,
-                ),
-                new Container(
-                  child: new RaisedButton(
-                    color: Colors.blue,
-                    child: new Text(
-                      "Cadastrar",
-                      style: new TextStyle(
-                          fontSize: 15.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w200,
-                          fontFamily: "Roboto"
-                      ),
-                    ),
-                    onPressed: () {
-                      bool formValidate = this._formKey.currentState.validate();
-                      bool radioSelected = this.isRadioButtonSelected();
-                      setState(() {
-                          if (radioSelected) {
-                            this._radioButtonInfo = "";
-                          } else {
-                            this._radioButtonInfo = "Selecione o seu sexo";
-                          }
-                        }
-                      );
-                      if (formValidate && this.isRadioButtonSelected()) {
-                        this.onCadastar();
-                      }
-                    },
-                  ),
-                  padding: const EdgeInsets.all(0.0),
-                  alignment: Alignment.center,
-                ),
-                new Container(
-                    padding: EdgeInsets.all(5.0),
-                    margin: EdgeInsets.only(left: 5.0),
-                    child: Text(
-                      "Prontuários: ",
-                      style: new TextStyle(
-                          fontSize: 15,
-                          color: const Color(0xFF000000),
-                          fontWeight: FontWeight.w200,
-                          fontFamily: "Roboto"
-                      ),
-                    )
-                ),
-                new Container(
-                  margin: const EdgeInsets.all(10.0),
-                  color: Colors.grey,
-                  height: 180.0,
-                  child: ListView(
-                    children: <Widget>[
-                      Container(
-                        child: Text("01 André"),
-                      ),
-                      Container(
-                        child: Text("02 Percy Jackson"),
-                      ),
-                      Container(
-                        child: Text("03 Annabeth"),
-                      ),
-                      Container(
-                        child: Text("04 Leo Valdez"),
-                      ),
-                      Container(
-                        child: Text("05 Franck"),
-                      ),
-                      Container(
-                        child: Text("06 Hazel Levesque"),
-                      ),
-                      Container(
-                        child: Text("07 Piper McLean"),
-                      ),
-                      Container(
-                        child: Text("08 Nico di Angelo"),
-                      ),
-                      Container(
-                        child: Text("09 Bianca di Angelo"),
-                      ),
-                      Container(
-                        child: Text("10 Jason"),
-                      ),
-                      Container(
-                        child: Text("11 Grover underwood"),
-                      ),
-                      Container(
-                        child: Text("12 Thalia "),
-                      ),
-                      Container(
-                        child: Text("13 Will Solangelo "),
-                      ),
-                      Container(
-                        child: Text("14 Reyna A. R. A "),
-                      ),
-                      Container(
-                        child: Text("15 Lucas Casttelan "),
-                      ),
-                    ],
-                  ),
-                ),
-              ]
-          ),
-        )
-       )
-       ],
-       ),
+              )
+            )
+        ],
+      ),
     );
   }
 
