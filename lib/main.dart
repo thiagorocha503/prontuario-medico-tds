@@ -52,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
       print("Data selecionada: ${picked.toString()}");
     setState(() {
       this.selectedDate = picked;
+      this._txtData.text = picked.toLocal().toString();
     });
   }
 
@@ -164,24 +165,41 @@ class _MyHomePageState extends State<MyHomePage> {
                   alignment: Alignment.center,
                 ),
                 new Container(
-                  child: new TextFormField(
-                    style: new TextStyle(
-                        fontSize: FONT_SIZE_TEXT_INPUT,
-                        color: const Color(0xFF000000),
-                        fontWeight: FontWeight.w200,
-                        fontFamily: "Roboto"),
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Data",
-                      hintText: "Digite a data da consulta",
-                    ),
-                    controller: this._txtData,
-                    validator: (value){
-                      if (value.isEmpty) {
-                        return "Insira a data";
-                      }                      
-                    }
-                  ),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 5,
+                        child:TextFormField(
+                        style: new TextStyle(
+                          fontSize: FONT_SIZE_TEXT_INPUT,
+                          color: const Color(0xFF000000),
+                          fontWeight: FontWeight.w200,
+                          fontFamily: "Roboto"
+                        ),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: "Data",
+                          hintText: "Digite a data da consulta",
+                        ),
+                        controller: this._txtData,
+                        validator: (value){
+                            if (value.isEmpty) {
+                              return "Insira a data";
+                            }                      
+                          }
+                        )
+                      ),
+                      Expanded(
+                        flex: 1,
+                          child: IconButton(
+                          icon: Icon(Icons.calendar_today, color: Colors.blue,),
+                          onPressed: (){
+                            this._selectDate(context);
+                          },
+                        ),
+                      )
+                    ],
+                  ) ,
                   padding: const EdgeInsets.all(5.0),
                   alignment: Alignment.center,
                 ),
