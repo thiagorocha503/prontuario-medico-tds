@@ -1,17 +1,19 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
-
-import 'package:flutter/material.dart' as prefix0;
-
+import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+ 
+ 
 void main() {
   runApp(new MyApp());
 }
-
+ 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Generated App',
+      title: 'Prontuário Médico',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
         primaryColor: const Color(0xFF2196f3),
@@ -22,25 +24,61 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
+ 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
+ 
   @override
   _MyHomePageState createState() => new _MyHomePageState();
 }
-
+ 
 class _MyHomePageState extends State<MyHomePage> {
-  GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  TextEditingController _txtNome = new TextEditingController();
-  TextEditingController _txtIdade = new TextEditingController();
-  TextEditingController _txtData = new TextEditingController();
-  TextEditingController _txtSintomas = new TextEditingController();
-  DateTime selectedDate = new DateTime.now(); //data selecionada
-  int GROUP_RADIO_BUTTON_SEXO = 0; // nenhum radio button
-  int _radioButtonSelected = 0;
-  String _radioButtonInfo = "";
   final double FONT_SIZE_TEXT_INPUT = 18.0;
+  int GROUP_RADIO_BUTTON_SEXO = 0; // nenhum radio button
+  DateTime selectedDate = new DateTime.now(); //data selecionada
+  GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  String _radioButtonInfo = "";
+  int _radioButtonSelected = 0;
+  List _prontuarioList = [];
+  TextEditingController _txtData = new TextEditingController();
+  TextEditingController _txtIdade = new TextEditingController();
+  TextEditingController _txtNome = new TextEditingController();
+  TextEditingController _txtSintomas = new TextEditingController();
+  int _lastRemovedPos;
+  Map<String, dynamic> _lastRemoved;
+ 
+ @override
+  void initState() {
+    super.initState();
+ 
+    _readData().then((data) {
+      setState(() {
+        _prontuarioList = json.decode(data);
+      });
+    });
+  }
+ 
+  void _addProntuario() {
+    setState(() {
+      Map<String, dynamic> novoPaciente = Map();
+      novoPaciente["nome"] = _txtNome.text;
+      novoPaciente["idade"] = _txtIdade.text;
+      if (GROUP_RADIO_BUTTON_SEXO == 1) {
+        novoPaciente['sexo'] = 'masculino';
+ 
+ 
+      } else if (GROUP_RADIO_BUTTON_SEXO == 2) {
+        novoPaciente['sexo'] = 'feminino';
+      }
+        novoPaciente["data"] = _txtData.text;
+        novoPaciente["sintomas"] = _txtSintomas.text;
 
+      _prontuarioList.add(novoPaciente);
+ 
+      _saveData();
+    });
+  }
+ 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
@@ -53,17 +91,11 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       this.selectedDate = picked;
       this._txtData.text = picked.toLocal().toString();
+   
     });
   }
-
-  void onCadastar() {
-    String nome = this._txtNome.text;
-    int idade = int.parse(this._txtIdade.text);
-    String data = this._txtData.text;
-    int sexo = this.GROUP_RADIO_BUTTON_SEXO;
-    String sintomas = this._txtSintomas.text;
-  }
-
+ 
+   
   bool isRadioButtonSelected() {
     if (GROUP_RADIO_BUTTON_SEXO == 1 || GROUP_RADIO_BUTTON_SEXO == 2) {
       return true;
@@ -71,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return false;
     }
   }
-
+ 
   void onReset() {
     setState(() {
       this._txtNome.text = "";
@@ -83,7 +115,41 @@ class _MyHomePageState extends State<MyHomePage> {
       this._radioButtonInfo = "";
     });
   }
-
+ 
+  void radioChanged(int value) {
+    setState(() {
+      this._radioButtonSelected = value;
+      this.GROUP_RADIO_BUTTON_SEXO = value;
+    });
+  }
+ 
+  //
+ 
+Future<File> _getFile() async {
+    final directory = await getApplicationDocumentsDirectory();
+    return File("${directory.path}/data.json");
+  }
+ 
+  Future<File> _saveData() async {
+    String data = json.encode(_prontuarioList);
+ 
+    final file = await _getFile();
+    return file.writeAsString(data);
+  }
+ 
+  Future<String> _readData() async {
+    try {
+      final file = await _getFile();
+ 
+      return file.readAsString();
+    } catch (e) {
+      return null;
+    }
+  }
+ 
+  //
+ 
+ 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -284,7 +350,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       new Container(
                         child: new TextFormField(
-                          maxLines: 15,
+                          maxLines: 5,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: "Sintomas",
@@ -330,7 +396,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               }
                             });
                             if (formValidate && this.isRadioButtonSelected()) {
-                              this.onCadastar();
+                                this._addProntuario();
+                                this.onReset();
+                                
                             }
                           },
                         ),
@@ -353,55 +421,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         margin: const EdgeInsets.all(10.0),
                         color: Colors.grey,
                         height: 180.0,
-                        child: ListView(
-                          children: <Widget>[
-                            Container(
-                              child: Text("01 André"),
-                            ),
-                            Container(
-                              child: Text("02 Percy Jackson"),
-                            ),
-                            Container(
-                              child: Text("03 Annabeth"),
-                            ),
-                            Container(
-                              child: Text("04 Leo Valdez"),
-                            ),
-                            Container(
-                              child: Text("05 Franck"),
-                            ),
-                            Container(
-                              child: Text("06 Hazel Levesque"),
-                            ),
-                            Container(
-                              child: Text("07 Piper McLean"),
-                            ),
-                            Container(
-                              child: Text("08 Nico di Angelo"),
-                            ),
-                            Container(
-                              child: Text("09 Bianca di Angelo"),
-                            ),
-                            Container(
-                              child: Text("10 Jason"),
-                            ),
-                            Container(
-                              child: Text("11 Grover underwood"),
-                            ),
-                            Container(
-                              child: Text("12 Thalia "),
-                            ),
-                            Container(
-                              child: Text("13 Will Solangelo "),
-                            ),
-                            Container(
-                              child: Text("14 Reyna A. R. A "),
-                            ),
-                            Container(
-                              child: Text("15 Lucas Casttelan "),
-                            ),
-                          ],
-                        ),
+                        child: RefreshIndicator(onRefresh: _refresh,
+                        child: ListView.builder(
+                        padding: EdgeInsets.only(top: 10.0),
+                        itemCount: _prontuarioList.length,
+                        itemBuilder: buildItem),),
+       
                       ),
                     ]
                   ),
@@ -411,11 +436,61 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
-  void radioChanged(int value) {
+ 
+ 
+  Future<Null> _refresh() async{
+    await Future.delayed(Duration(seconds: 1));
+ 
     setState(() {
-      this._radioButtonSelected = value;
-      this.GROUP_RADIO_BUTTON_SEXO = value;
+    _saveData();
     });
+ 
+    return null;
+  }
+ 
+ 
+  Widget buildItem(BuildContext context, int index){
+    return Dismissible(
+      key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
+      background: Container(
+        color: Colors.red,
+        child: Align(
+          alignment: Alignment(-0.9, 0.0),
+          child: Icon(Icons.delete, color: Colors.white,),
+        ),
+      ),
+      direction: DismissDirection.startToEnd,
+      child: ListTile(
+        title: Text(_prontuarioList[index]["nome"]+","+_prontuarioList[index]["idade"]+" anos,"+_prontuarioList[index]["sexo"]+","+_prontuarioList[index]["data"]),
+        subtitle: Text(
+          _prontuarioList[index]["sintomas"]
+        ),
+      ),
+      onDismissed: (direction){
+        setState(() {
+          _lastRemoved = Map.from(_prontuarioList[index]);
+          _lastRemovedPos = index;
+          _prontuarioList.removeAt(index);
+ 
+          _saveData();
+ 
+          final snack = SnackBar(
+            content: Text("Prontuário \"${_lastRemoved["nome"]}\" removido!"),
+            action: SnackBarAction(label: "Desfazer",
+                onPressed: () {
+                  setState(() {
+                    _prontuarioList.insert(_lastRemovedPos, _lastRemoved);
+                    _saveData();
+                  });
+                }),
+            duration: Duration(seconds: 2),
+          );
+ 
+          Scaffold.of(context).removeCurrentSnackBar();
+          Scaffold.of(context).showSnackBar(snack);
+ 
+        });
+      },
+    );
   }
 }
