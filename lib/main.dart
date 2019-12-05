@@ -166,12 +166,12 @@ Future<File> _getFile() async {
       ),
       body: Stack(
         children: <Widget>[
-          Center(
-            child: new Image.asset(
-              'assets/images/background.jpg',
-              width: 500,
-              height: 1000,
-              fit: BoxFit.fill,
+          new Container(
+            decoration: new BoxDecoration(
+                image: new DecorationImage(
+                image: new AssetImage("assets/images/background.jpg"),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           SingleChildScrollView(
