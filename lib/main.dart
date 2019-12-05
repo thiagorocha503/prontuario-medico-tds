@@ -350,7 +350,7 @@ Future<File> _getFile() async {
                       ),
                       new Container(
                         child: new TextFormField(
-                          maxLines: 5,
+                          maxLines: 10,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: "Sintomas",
@@ -418,15 +418,16 @@ Future<File> _getFile() async {
                           )
                       ),
                       new Container(
-                        margin: const EdgeInsets.all(10.0),
-                        color: Colors.grey,
-                        height: 180.0,
-                        child: RefreshIndicator(onRefresh: _refresh,
-                        child: ListView.builder(
-                        padding: EdgeInsets.only(top: 10.0),
-                        itemCount: _prontuarioList.length,
-                        itemBuilder: buildItem),),
-       
+                          margin: const EdgeInsets.all(10.0),
+                          color: Colors.grey,
+                          height: 300.0,
+                          child: RefreshIndicator(onRefresh: _refresh,
+                          child: ListView.builder(
+                            padding: EdgeInsets.only(top: 10.0),
+                            itemCount: _prontuarioList.length,
+                            itemBuilder: buildItem
+                          ),
+                        ),  
                       ),
                     ]
                   ),
@@ -461,7 +462,7 @@ Future<File> _getFile() async {
       ),
       direction: DismissDirection.startToEnd,
       child: ListTile(
-        title: Text(_prontuarioList[index]["nome"]+","+_prontuarioList[index]["idade"]+" anos,"+_prontuarioList[index]["sexo"]+","+_prontuarioList[index]["data"]),
+        title: Text(_prontuarioList[index]["nome"]+", "+_prontuarioList[index]["idade"]+" anos, "+_prontuarioList[index]["sexo"]+", "+_prontuarioList[index]["data"]),
         subtitle: Text(
           _prontuarioList[index]["sintomas"]
         ),
