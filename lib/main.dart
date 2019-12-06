@@ -6,23 +6,12 @@ import 'package:path_provider/path_provider.dart';
  
  
 void main() {
-  runApp(new MyApp());
-}
- 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Prontuário Médico',
-      theme: new ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: const Color(0xFF2196f3),
-        accentColor: const Color(0xFF2196f3),
-        canvasColor: const Color(0xFFfafafa),
-      ),
-      home: new MyHomePage(),
-    );
-  }
+  runApp(
+    MaterialApp(
+      title: "Prontuário médico",
+      home: MyHomePage()
+      )
+  );
 }
  
 class MyHomePage extends StatefulWidget {
@@ -33,99 +22,37 @@ class MyHomePage extends StatefulWidget {
 }
  
 class _MyHomePageState extends State<MyHomePage> {
-  final double FONT_SIZE_TEXT_INPUT = 18.0;
-  int GROUP_RADIO_BUTTON_SEXO = 0; // nenhum radio button
-  DateTime selectedDate = new DateTime.now(); //data selecionada
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  String _radioButtonInfo = "";
-  int _radioButtonSelected = 0;
-  List _prontuarioList = [];
+  //constantes
+  static const double FONT_SIZE_TEXT_INPUT = 18.0;
+  static const String FONT_FAMILY = "Roboto";
+  static const int MASCULINO = 1;
+  static const int FEMININO = 2;
+  int _radioButtonSelected = 0; // nenhum radio button
+  DateTime selectedDate = new DateTime.now(); //data selecionada
+  String _radioButtonAviso = "";
+
+  // controllers
   TextEditingController _txtData = new TextEditingController();
   TextEditingController _txtIdade = new TextEditingController();
   TextEditingController _txtNome = new TextEditingController();
   TextEditingController _txtSintomas = new TextEditingController();
+  // lista
   int _lastRemovedPos;
+  List _prontuarioList = [];
   Map<String, dynamic> _lastRemoved;
  
  @override
   void initState() {
     super.initState();
- 
     _readData().then((data) {
       setState(() {
         _prontuarioList = json.decode(data);
       });
     });
   }
- 
-  void _addProntuario() {
-    setState(() {
-      Map<String, dynamic> novoPaciente = Map();
-      novoPaciente["nome"] = _txtNome.text;
-      novoPaciente["idade"] = _txtIdade.text;
-      if (GROUP_RADIO_BUTTON_SEXO == 1) {
-        novoPaciente['sexo'] = 'masculino';
- 
- 
-      } else if (GROUP_RADIO_BUTTON_SEXO == 2) {
-        novoPaciente['sexo'] = 'feminino';
-      }
-        novoPaciente["data"] = _txtData.text;
-        novoPaciente["sintomas"] = _txtSintomas.text;
-
-      _prontuarioList.add(novoPaciente);
- 
-      _saveData();
-    });
-  }
- 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2015, 8),
-      lastDate: DateTime(2101),
-    );
-    if (picked != null && picked != selectedDate)
-      print("Data selecionada: ${picked.toString()}");
-    setState(() {
-      this.selectedDate = picked;
-      this._txtData.text = picked.toLocal().toString();
-   
-    });
-  }
- 
-   
-  bool isRadioButtonSelected() {
-    if (GROUP_RADIO_BUTTON_SEXO == 1 || GROUP_RADIO_BUTTON_SEXO == 2) {
-      return true;
-    } else {
-      return false;
-    }
-  }
- 
-  void onReset() {
-    setState(() {
-      this._txtNome.text = "";
-      this._txtIdade.text = "";
-      this._txtData.text = "";
-      this._txtSintomas.text = "";
-      this.GROUP_RADIO_BUTTON_SEXO = 3;
-      this._formKey = GlobalKey<FormState>();
-      this._radioButtonInfo = "";
-    });
-  }
- 
-  void radioChanged(int value) {
-    setState(() {
-      this._radioButtonSelected = value;
-      this.GROUP_RADIO_BUTTON_SEXO = value;
-    });
-  }
- 
-  //
- 
-Future<File> _getFile() async {
+  
+  Future<File> _getFile() async {
     final directory = await getApplicationDocumentsDirectory();
     return File("${directory.path}/data.json");
   }
@@ -146,8 +73,66 @@ Future<File> _getFile() async {
       return null;
     }
   }
+
+  void _addProntuario() {
+    setState(() {
+        Map<String, dynamic> novoPaciente = Map();
+        novoPaciente["nome"] = _txtNome.text;
+        novoPaciente["idade"] = _txtIdade.text;
+        if (this._radioButtonSelected == 1) {
+          novoPaciente['sexo'] = 'masculino';
+        } else if (this._radioButtonSelected == 2) {
+          novoPaciente['sexo'] = 'feminino';
+        }
+        novoPaciente["data"] = _txtData.text;
+        novoPaciente["sintomas"] = _txtSintomas.text;
+        _prontuarioList.add(novoPaciente);
+        _saveData();
+      }
+    );
+  }
  
-  //
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        this.selectedDate = picked;
+        this._txtData.text = picked.toLocal().toString();
+      }
+    );
+  }
+ 
+   
+  bool isRadioButtonSelected() {
+    if (this._radioButtonSelected == MASCULINO || this._radioButtonSelected == FEMININO) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+ 
+  void onReset() {
+    setState(() {
+      this._txtNome.text = "";
+      this._txtIdade.text = "";
+      this._txtData.text = "";
+      this._txtSintomas.text = "";
+      this._radioButtonSelected = 3;
+      this._formKey = GlobalKey<FormState>();
+      this._radioButtonAviso = "";
+    });
+  }
+ 
+  void radioChanged(int value) {
+    setState(() {
+      this._radioButtonSelected = value;
+    });
+  }
  
  
   @override
@@ -207,11 +192,12 @@ Future<File> _getFile() async {
                               fontSize: FONT_SIZE_TEXT_INPUT,
                               color: const Color(0xFF000000),
                               fontWeight: FontWeight.w200,
-                              fontFamily: "Roboto"),
+                              fontFamily:  _MyHomePageState.FONT_FAMILY
+                          ),
                           validator: (value) {
                             if (value.isEmpty) {
                               return "Insira seu nome";
-                            }
+                            } 
                           },
                           controller: this._txtNome,
                         ),
@@ -230,12 +216,16 @@ Future<File> _getFile() async {
                               fontSize: FONT_SIZE_TEXT_INPUT,
                               color: const Color(0xFF000000),
                               fontWeight: FontWeight.w200,
-                              fontFamily: "Roboto"),
+                              fontFamily:  _MyHomePageState.FONT_FAMILY
+                          ),
                           controller: this._txtIdade,
                           validator: (value) {
                             if (value.isEmpty) {
                               return "Insira sua idade";
                             }
+                            if (int.parse(value) == 0){
+                              return "Insira um número diferente de zero";
+                            }                           
                           },
                         ),
                         padding: const EdgeInsets.all(5.0),
@@ -245,13 +235,13 @@ Future<File> _getFile() async {
                         child: Row(
                           children: <Widget>[
                             Expanded(
-                                flex: 5,
-                                child: TextFormField(
-                                    style: new TextStyle(
-                                        fontSize: FONT_SIZE_TEXT_INPUT,
-                                        color: const Color(0xFF000000),
+                              flex: 5,
+                              child: TextFormField(
+                                style: new TextStyle(
+                                    fontSize: FONT_SIZE_TEXT_INPUT,
+                                    color: const Color(0xFF000000),
                                         fontWeight: FontWeight.w200,
-                                        fontFamily: "Roboto"
+                                        fontFamily:  _MyHomePageState.FONT_FAMILY
                                     ),
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(),
@@ -263,8 +253,8 @@ Future<File> _getFile() async {
                                       if (value.isEmpty) {
                                         return "Insira a data";
                                       }
-                                    }
-                                  )
+                                   }
+                              )
                             ),
                             Expanded(
                               flex: 1,
@@ -297,16 +287,16 @@ Future<File> _getFile() async {
                                       fontSize: 13.0,
                                       color: const Color(0xFF000000),
                                       fontWeight: FontWeight.w200,
-                                      fontFamily: "Roboto"
+                                      fontFamily:  _MyHomePageState.FONT_FAMILY
                                   ),
                                 ),
                               ),
                               new Radio(
-                                  groupValue: this.GROUP_RADIO_BUTTON_SEXO,
-                                  value: 1, //this.RADIO_BUTTON_MASCULINO_VALUE,
+                                  groupValue: this._radioButtonSelected,
+                                  value: MASCULINO, 
                                   activeColor: Colors.blue,
                                   onChanged: (int value) {
-                                    radioChanged(value);
+                                    radioChanged(MASCULINO);
                                   }
                               ),
                               new Text(
@@ -319,11 +309,11 @@ Future<File> _getFile() async {
                                 ),
                               ),
                               new Radio(
-                                  groupValue: this.GROUP_RADIO_BUTTON_SEXO,
-                                  value: 2, //this.RADIO_BUTTON_FEMININO_VALUE,
+                                  groupValue: this._radioButtonSelected,
+                                  value: FEMININO , 
                                   activeColor: Colors.blue,
                                   onChanged: (int value) {
-                                    radioChanged(value);
+                                    radioChanged(FEMININO);
                                   }
                               ),
                               new Text(
@@ -332,7 +322,8 @@ Future<File> _getFile() async {
                                     fontSize: 13.0,
                                     color: const Color(0xFF000000),
                                     fontWeight: FontWeight.w200,
-                                    fontFamily: "Roboto"),
+                                    fontFamily: _MyHomePageState.FONT_FAMILY
+                                ),
                               )
                             ]
                         ),
@@ -344,7 +335,7 @@ Future<File> _getFile() async {
                             right: 5.0, top: 0.0, bottom: 15, left: 5.0
                         ),
                         child: Text(
-                          this._radioButtonInfo,
+                          this._radioButtonAviso,
                           style: TextStyle(color: Colors.red),
                         ),
                       ),
@@ -360,7 +351,7 @@ Future<File> _getFile() async {
                               fontSize: FONT_SIZE_TEXT_INPUT,
                               color: const Color(0xFF000000),
                               fontWeight: FontWeight.w200,
-                              fontFamily: "Roboto"
+                              fontFamily:  _MyHomePageState.FONT_FAMILY
                           ),
                           controller: this._txtSintomas,
                           validator: (value) {
@@ -381,7 +372,7 @@ Future<File> _getFile() async {
                                 fontSize: 15.0,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w200,
-                                fontFamily: "Roboto"
+                                fontFamily:  _MyHomePageState.FONT_FAMILY
                             ),
                           ),
                           onPressed: () {
@@ -390,9 +381,9 @@ Future<File> _getFile() async {
                             bool radioSelected = this.isRadioButtonSelected();
                             setState(() {
                               if (radioSelected) {
-                                this._radioButtonInfo = "";
+                                this._radioButtonAviso = "";
                               } else {
-                                this._radioButtonInfo = "Selecione o seu sexo";
+                                this._radioButtonAviso = "Selecione o seu sexo";
                               }
                             });
                             if (formValidate && this.isRadioButtonSelected()) {
@@ -414,7 +405,8 @@ Future<File> _getFile() async {
                                 fontSize: 15,
                                 color: const Color(0xFF000000),
                                 fontWeight: FontWeight.w200,
-                                fontFamily: "Roboto"),
+                                fontFamily:  _MyHomePageState.FONT_FAMILY
+                            ),
                           )
                       ),
                       new Container(
@@ -480,17 +472,20 @@ Future<File> _getFile() async {
             action: SnackBarAction(label: "Desfazer",
                 onPressed: () {
                   setState(() {
-                    _prontuarioList.insert(_lastRemovedPos, _lastRemoved);
-                    _saveData();
-                  });
-                }),
+                      _prontuarioList.insert(_lastRemovedPos, _lastRemoved);
+                      _saveData();
+                      }
+                    );
+                  }
+                ),
             duration: Duration(seconds: 2),
           );
  
           Scaffold.of(context).removeCurrentSnackBar();
           Scaffold.of(context).showSnackBar(snack);
  
-        });
+          }
+        );
       },
     );
   }
