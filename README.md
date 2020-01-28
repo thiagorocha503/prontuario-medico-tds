@@ -1,3 +1,4 @@
+[![Codemagic build status](https://api.codemagic.io/apps/5e2887901a3aa60008d091f5/5e2887901a3aa60008d091f4/status_badge.svg)](https://codemagic.io/apps/5e2887901a3aa60008d091f5/5e2887901a3aa60008d091f4/latest_build)
 # prontuario_medico
 
 A new Flutter project.
